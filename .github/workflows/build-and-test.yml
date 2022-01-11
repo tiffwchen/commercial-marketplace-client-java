@@ -31,11 +31,11 @@ jobs:
     - name: TestCreate .env
       run: |
         touch .env
-        echo AAD_TENANT_ID: ${{ secrets.AAD_TENANT_ID }} > .env
-        echo AAD_APP_CLIENT_ID: ${{ secrets.AAD_APP_CLIENT_ID }} > .env
-        echo AAD_APP_CLIENT_SECRET: ${{ secrets.AAD_APP_CLIENT_SECRET }} > .env
-        echo AAD_APP_CERT: ${{ secrets.AAD_APP_CERT }} > .env
-        echo AAD_APP_CERT_SECRET: ${{ secrets.AAD_APP_CERT_SECRET }} > .env
+        echo AAD_TENANT_ID: ${{ secrets.AAD_TENANT_ID }} >> .env
+        echo AAD_APP_CLIENT_ID: ${{ secrets.AAD_APP_CLIENT_ID }} >> .env
+        echo AAD_APP_CLIENT_SECRET: ${{ secrets.AAD_APP_CLIENT_SECRET }} >> .env
+        echo AAD_APP_CERT: ${{ secrets.AAD_APP_CERT }} >> .env
+        echo AAD_APP_CERT_SECRET: ${{ secrets.AAD_APP_CERT_SECRET }} >> .env
         cat .env
     - name: Build JAR, Sources, and Docs with Maven
       run: mvn -B package --file sdk/pom.xml -Dsha=${SHA:0:7}
