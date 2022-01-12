@@ -76,7 +76,7 @@ public class TestCertificateMarketplaceAPIs {
             e.printStackTrace();
         }
 
-        if (StringUtils.isEmpty(tenantId) || privateKey == null){
+        if (StringUtils.isEmpty(tenantId)){
             throw new IllegalStateException("AAD_TENANT_ID must be defined as an environment variable.");
         }
 
