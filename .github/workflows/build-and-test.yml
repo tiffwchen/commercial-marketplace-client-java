@@ -13,9 +13,16 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+
     env:
+      AAD_TENANT_ID: ${{ secrets.AADTENANTID }}
+      AAD_APP_CLIENT_ID: ${{ secrets.AADAPPCLIENTIT }}
+      AAD_APP_CLIENT_SECRET: ${{ secrets.AADAPPCLIENTSECRET }}
+      AAD_APP_CERT: ${{ secrets.AADAPPCERT }}
+      AAD_APP_CERT_SECRET: ${{ secrets.AADAPPCERTSECRET }}
       AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
       SHA: ${{ github.sha }}
+      
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 1.11
@@ -23,13 +30,6 @@ jobs:
       with:
         distribution: 'zulu'
         java-version: '11'
-    - name: TestCreate env
-      run: |
-        echo "AAD_TENANT_ID=${{ secrets.AAD_TENANT_ID }}" >> $GITHUB_ENV
-        echo "AAD_APP_CLIENT_ID=${{ secrets.AAD_APP_CLIENT_ID }}" >> $GITHUB_ENV
-        echo "AAD_APP_CLIENT_SECRET=${{ secrets.AAD_APP_CLIENT_SECRET }}" >> $GITHUB_ENV
-        echo "AAD_APP_CERT=${{ secrets.AAD_APP_CERT }}" >> $GITHUB_ENV
-        echo "AAD_APP_CERT_SECRET=${{ secrets.AAD_APP_CERT_SECRET }}" >> $GITHUB_ENV
     - name: Build JAR, Sources, and Docs with Maven
       run: mvn -B package --file sdk/pom.xml -Dsha=${SHA:0:7}
     - name: Copy artifacts to single directory
