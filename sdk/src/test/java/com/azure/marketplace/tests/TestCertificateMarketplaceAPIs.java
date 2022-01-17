@@ -76,8 +76,13 @@ public class TestCertificateMarketplaceAPIs {
             e.printStackTrace();
         }
 
-        if (StringUtils.isEmpty(tenantId) || privateKey == null){
-            throw new IllegalStateException("AAD_TENANT_ID, AAD_APP_CLIENT_ID, AAD_APP_CERT_LOCATION, and AAD_APP_CERT_SECRET must be defined as environment variables.");
+        if (StringUtils.isEmpty(tenantId)){
+            String message = "AAD_TENANT_ID must be defined as an environment variable. Value: " + tenantId;
+            throw new IllegalStateException(message);
+        }
+
+        if (privateKey == null){
+            throw new IllegalStateException("AAD_APP_CERT_SECRET must be defined as an environment variable.");
         }
 
         CertificateTokenProviderSettings settings = new CertificateTokenProviderSettings();

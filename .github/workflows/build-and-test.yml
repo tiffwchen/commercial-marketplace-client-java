@@ -9,20 +9,20 @@ on:
   pull_request:
     branches: [ main, dev ]
 
-env:
-  AAD_TENANT_ID: ${{ secrets.AAD_TENANT_ID }}
-  AAD_APP_CLIENT_ID: ${{ secrets.AAD_APP_CLIENT_ID }}
-  AAD_APP_CLIENT_SECRET: ${{ secrets.AAD_APP_CLIENT_SECRET }}
-  AAD_APP_CERT: ${{ secrets.AAD_APP_CERT }}
-  AAD_APP_CERT_SECRET: ${{ secrets.AAD_APP_CERT_SECRET }}
-  AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
-  SHA: ${{ github.sha }}
-
 jobs:
   build:
 
     runs-on: ubuntu-latest
 
+    env:
+      AAD_TENANT_ID: ${{ secrets.AAD_TENANT_ID }}
+      AAD_APP_CLIENT_ID: ${{ secrets.AAD_APP_CLIENT_ID }}
+      AAD_APP_CLIENT_SECRET: ${{ secrets.AAD_APP_CLIENT_SECRET }}
+      AAD_APP_CERT: ${{ secrets.AAD_APP_CERT }}
+      AAD_APP_CERT_SECRET: ${{ secrets.AAD_APP_CERT_SECRET }}
+      AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
+      SHA: ${{ github.sha }}
+      
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 1.11
